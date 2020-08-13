@@ -1,22 +1,27 @@
-'use strict';
+//console.log('start')
+
+
 
 const fs = require('fs');
 
 let raw_data = fs.readFileSync('full.json');
 
-let student = JSON.parse(raw_data);
 
-let name = student;
+let items = JSON.parse(raw_data);
 
 
-for(var i = 0; i < 100; i++) {
-  var obj = name[i];
-  console.log(obj.Profile)
+let input = "jav"
+let returnVal = []
+
+var my_json = JSON.stringify(items)
+
+for (i = 0; i < items.length; i++){
+  let val = JSON.stringify(items[i].fullName.toLowerCase());
+  let search = val.includes(input.toLowerCase());
+//console.log(search);
+    if(search == true){
+        returnVal.push({'itemNumber': items[i].itemNumber, 'description': items[i].fullName,'details': items[i]});
+      
+   };
 }
-
-
-
-//console.log(name);
-// console.log(raw_data);
-
-
+console.log(returnVal);
